@@ -1,0 +1,7 @@
+C:\Users\pedro\source\repos\GestãoDeEquipamentos.Cs\GestãoDeEquipamentos\obj\Debug\GestãoDeEquipamentos.csprojAssemblyReference.cache
+C:\Users\pedro\source\repos\GestãoDeEquipamentos.Cs\GestãoDeEquipamentos\obj\Debug\GestãoDeEquipamentos.csproj.CoreCompileInputs.cache
+C:\Users\pedro\source\repos\GestãoDeEquipamentos.Cs\GestãoDeEquipamentos\bin\Debug\GestãoDeEquipamentos.exe.config
+C:\Users\pedro\source\repos\GestãoDeEquipamentos.Cs\GestãoDeEquipamentos\bin\Debug\GestãoDeEquipamentos.exe
+C:\Users\pedro\source\repos\GestãoDeEquipamentos.Cs\GestãoDeEquipamentos\bin\Debug\GestãoDeEquipamentos.pdb
+C:\Users\pedro\source\repos\GestãoDeEquipamentos.Cs\GestãoDeEquipamentos\obj\Debug\GestãoDeEquipamentos.exe
+C:\Users\pedro\source\repos\GestãoDeEquipamentos.Cs\GestãoDeEquipamentos\obj\Debug\GestãoDeEquipamentos.pdb
