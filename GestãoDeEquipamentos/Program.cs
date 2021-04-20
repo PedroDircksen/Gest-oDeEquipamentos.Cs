@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,40 +13,21 @@ namespace GestãoDeEquipamentos
             string[] nomesDosEquipamentos = new string[100];
             string[] precosDosEquipamentos = new string[100];
             string[] numerosDeSeries = new string[100];
-            string[] datasDeFabricacoes = new string[100];
+            DateTime[] datasDeFabricacoes = new DateTime[100];
             string[] fabricantes = new string[100];
             string[] nomesDosChamados = new string[100];
             string[] descricoesDosChamados = new string[100];
             string[] equipamentosDosChamados = new string[100];
-            string[] datasAbChamados = new string[100];
-            int[] dias = new int[100];
-            int[] meses = new int[100];
-            int[] anos = new int[100];
-            int[] diasAtuais = new int[100];
-            int[] mesesAtuais = new int[100];
-            int[] anosAtuais = new int[100];
-            int[] diasTotais = new int[100];
-            int[] diasAtuaisTotais = new int[100];
-            string[] datasAtChamados = new string[100];
-            DateTime data_atual;
+            DateTime[] datasAbChamados = new DateTime[100];            
+            DateTime[] datasAtChamados = new DateTime[100];
             int countChamados = 0, countEquipamentos = 0;
             string Opcao, Opcao2 = "", Opcao3 = "", Opcao4 = "";
             string nomeDoEquipamento;
-            string data = "", dataAtual;
-            string diaAtual;
-            string mesAtual;
-            string anoAtual;
-            int dA_temp = 0;
-            int mA_temp = 0;
-            int aA_temp = 0;
-            string dia;
-            string mes;
-            string ano;
-            int d_temp = 0;
-            int m_temp = 0;
-            int a_temp = 0;
+            DateTime dataEquipamentos = DateTime.MinValue, dataChamados = DateTime.MinValue;
+            
             do
             {
+                nomeDoEquipamento = null;
                 Console.Clear();
                 Console.WriteLine("\n                        Menu Principal");
                 Console.WriteLine("______________________________________________________________________\n\n");
@@ -79,7 +60,7 @@ namespace GestãoDeEquipamentos
                         numerosDeSeries[countEquipamentos] = Console.ReadLine();
 
                         Console.WriteLine("Data de fábricação: ");
-                        datasDeFabricacoes[countEquipamentos] = Console.ReadLine();
+                        datasDeFabricacoes[countEquipamentos] = Convert.ToDateTime(Console.ReadLine());
 
                         Console.WriteLine("Fabricante: ");
                         fabricantes[countEquipamentos] = Console.ReadLine();
@@ -189,7 +170,7 @@ namespace GestãoDeEquipamentos
                                         case "4":
                                             Console.Clear();
                                             Console.WriteLine("Digite a nova data de fabricação: ");
-                                            datasDeFabricacoes[i2] = Console.ReadLine();
+                                            datasDeFabricacoes[i2] = Convert.ToDateTime(Console.ReadLine());
                                             Opcao2 = "6";
                                             Console.Clear();
                                             break;
@@ -242,6 +223,7 @@ namespace GestãoDeEquipamentos
                         break;
 
                     case "5":
+
                         while (true)
                         {
                             Console.Clear();
@@ -250,7 +232,7 @@ namespace GestãoDeEquipamentos
                             Console.WriteLine("1.  Registrar Chamado\n2.  Vizualizar Chamados\n3.  Editar Chamado\n4.  Excluir Chamado\n5.  Voltar");
                             Console.WriteLine("\n____________________________________________________________________\n\n");
                             Opcao3 = Console.ReadLine();
-                            if(Opcao3 == "5")
+                            if (Opcao3 == "5")
                             {
                                 Console.Clear();
                                 Console.WriteLine("Voltando para o menu principal...\n\nPressione qualquer tecla para continuar");
@@ -260,6 +242,7 @@ namespace GestãoDeEquipamentos
                             Console.Clear();
                             switch (Opcao3)
                             {
+
                                 case "1":
                                     Console.Clear();
                                     Console.WriteLine("Título do Chamado: ");
@@ -270,66 +253,36 @@ namespace GestãoDeEquipamentos
                                     descricoesDosChamados[countChamados] = Console.ReadLine();
 
                                     Console.Clear();
-                                    Console.WriteLine("Equipamento: ");
-                                    equipamentosDosChamados[countChamados] = Console.ReadLine();
-                                    do
+                                    Console.WriteLine("Escolha um dos equipamento: ");
+                                    for (int i = 0; i < countEquipamentos; i++)
                                     {
-                                        Console.Clear();
-                                        Console.WriteLine("Data de Abertura: ");
-                                        data = Console.ReadLine();
-                                        if (data.Length < 10)
+                                        if (nomesDosEquipamentos[i] == null)
                                         {
-                                            Console.WriteLine("Formato inválido, tente novamente");
-                                            Console.ReadLine();
+                                            Console.WriteLine("Item " + i + " Excluído");
                                         }
                                         else
                                         {
-
-                                            dia = data.Split('/')[0];
-                                            mes = data.Split('/')[1];
-                                            ano = data.Split('/')[2];
-
-                                            d_temp = Convert.ToInt32(dia);
-                                            m_temp = Convert.ToInt32(mes);
-                                            a_temp = Convert.ToInt32(ano);
-
-                                            diasTotais[countChamados] = d_temp + m_temp * 30 + a_temp * 365;
-
-                                            datasAbChamados[countChamados] = data;
+                                            Console.WriteLine("Item " + i + ": " + nomesDosEquipamentos[i]);
                                         }
-                                    } while (data.Length < 10);
-                                    do
-                                    {
-                                        Console.Clear();
-                                        Console.WriteLine("Data atual: ");
-                                        dataAtual = Console.ReadLine();
-                                        if (dataAtual.Length < 10)
-                                        {
-                                            Console.WriteLine("Formato inválido, tente novamente");
-                                            Console.ReadLine();
-                                        }
-                                        else
-                                        {
+                                    }
 
-                                            diaAtual = dataAtual.Split('/')[0];
-                                            mesAtual = dataAtual.Split('/')[1];
-                                            anoAtual = dataAtual.Split('/')[2];
+                                    int numeroEscolhido = Convert.ToInt32(Console.ReadLine());
+                                    equipamentosDosChamados[countChamados] = nomesDosEquipamentos[numeroEscolhido];
 
-                                            dA_temp = Convert.ToInt32(diaAtual);
-                                            mA_temp = Convert.ToInt32(mesAtual);
-                                            aA_temp = Convert.ToInt32(anoAtual);
+                                    Console.Clear();
+                                    Console.WriteLine("Data de Abertura: ");
+                                    dataChamados = Convert.ToDateTime(Console.ReadLine());
 
-                                            diasAtuaisTotais[countChamados] = dA_temp + mA_temp * 30 + aA_temp * 365;
-                                            datasAtChamados[countChamados] = dataAtual;
-                                        }
-                                    } while (dataAtual.Length < 10);
-                                    countChamados++;
 
                                     Console.WriteLine("Seu Chamado foi registrado com sucesso!\n\n");
 
                                     Console.ReadLine();
                                     Console.Clear();
+                                    datasAbChamados[countChamados] = dataChamados;
+                                    countChamados++;
+
                                     continue;
+
 
 
                                 case "2":
@@ -346,12 +299,13 @@ namespace GestãoDeEquipamentos
                                             }
                                             else
                                             {
+                                                TimeSpan diasEmAberto = (DateTime.Now) - (datasAbChamados[i]);
                                                 Console.Clear();
                                                 Console.WriteLine("\n\n" + (i + 1) + "° Chamado resgistrado:");
                                                 Console.WriteLine("\nTítulo do Chamado: " + nomesDosChamados[i]);
                                                 Console.WriteLine("\nEquipamento: " + equipamentosDosChamados[i]);
-                                                Console.WriteLine("\nData de Abertura: " + datasAbChamados[i]);
-                                                Console.WriteLine("\nDias decorridos: " + (diasAtuaisTotais[i] - diasTotais[i]));
+                                                Console.WriteLine("\nData de Abertura: " + datasAbChamados[i].ToString("dd/MM/yyyy"));
+                                                Console.WriteLine("\nDias decorridos: " + diasEmAberto.ToString("dd"));
                                                 Console.ReadLine();
                                                 Console.Clear();
                                                 Opcao3 = "5";
@@ -397,7 +351,7 @@ namespace GestãoDeEquipamentos
                                             Console.WriteLine("Menu de Edição\n");
                                             Console.WriteLine("\n1. Editar Título do Chamado\n2. Editar Descrição do Chamado\n3. Editar Equipamento");
                                             Console.WriteLine("4. Editar Data de Abertura\n5. voltar para o menu de chamados\n");
-                                            Opcao4 = Console.ReadLine();                                            
+                                            Opcao4 = Console.ReadLine();
                                             switch (Opcao4)
                                             {
                                                 case "1":
@@ -419,40 +373,17 @@ namespace GestãoDeEquipamentos
                                                 case "3":
                                                     Console.Clear();
                                                     Console.WriteLine("Digite o novo Equipamento: ");
-                                                    data = Console.ReadLine();
                                                     equipamentosDosChamados[i3] = Console.ReadLine();
                                                     Console.ReadLine();
                                                     Opcao4 = "5";
                                                     Console.Clear();
                                                     continue;
                                                 case "4":
-                                                    do
-                                                    {
-                                                        Console.Clear();
+
+                                                    Console.Clear();
                                                     Console.WriteLine("Digite a nova Data de Abertura: ");
-                                                    data = Console.ReadLine();
-                                                    
-                                                        if (data.Length < 10)
-                                                        {
-                                                            Console.WriteLine("Formato inválido, tente novamente");
-                                                            Console.ReadLine();
-                                                        }
-                                                        else
-                                                        {
-
-                                                            dia = data.Split('/')[0];
-                                                            mes = data.Split('/')[1];
-                                                            ano = data.Split('/')[2];
-
-                                                            d_temp = Convert.ToInt32(dia);
-                                                            m_temp = Convert.ToInt32(mes);
-                                                            a_temp = Convert.ToInt32(ano);
-
-                                                            diasTotais[i3] = d_temp + m_temp * 30 + a_temp * 365;
-
-                                                            datasAbChamados[i3] = data;
-                                                        }
-                                                    } while (data.Length < 10);
+                                                    dataChamados = Convert.ToDateTime(Console.ReadLine());
+                                                    datasAbChamados[i3] = dataChamados;
                                                     Opcao4 = "5";
                                                     Console.Clear();
                                                     continue;
@@ -515,8 +446,12 @@ namespace GestãoDeEquipamentos
                             }
                         }
                         break;
-
                 }
+
+
+
+
+
             } while (Opcao != "6");
         }
     }
